@@ -24,8 +24,15 @@ const PosterData = ({ data }) => {
         </p>
         <Btns
           buttonTitle={"Play Now"}
-          buttonStyle={"bg-red-600 text-white p-2 text-lg rounded-md w-52 my-3"}
+          buttonStyle={
+            "bg-red-600 text-white p-2 text-lg rounded-md w-52 my-3 "
+          }
         />
+        {data.genres && data.genres.length > 0 && (
+          <h1 className="text-9xl font-bold opacity-40">
+            {data.genres[0].name}
+          </h1>
+        )}
       </div>
     </>
   );

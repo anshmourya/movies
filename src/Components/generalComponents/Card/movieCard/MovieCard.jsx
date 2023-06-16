@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import Btns from "../../../Buttons/Btns";
 
-const MovieCard = ({ onClickFunction, data }) => {
-  const { title, backdrop_path: img, release_date } = data;
+const MovieCard = ({ data }) => {
+  const navigate = useNavigate();
+  const { title, backdrop_path: img, release_date, id } = data;
   return (
     <>
       <div className="relative cursor-pointer border-l-4 border-transparent hover:border-red-600 transition-all  hover:scale-110 rounded-lg aaaa m-2">
@@ -15,7 +17,7 @@ const MovieCard = ({ onClickFunction, data }) => {
           <div>{release_date}</div>
           <Btns
             buttonTitle={"Play Now"}
-            onClickFuntion={onClickFunction}
+            onClickFuntion={() => navigate(`showdetail/${id}`)}
             buttonStyle={" bg-red-600 text-white p-2 text-sm rounded-md w-35"}
           />
         </div>

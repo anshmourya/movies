@@ -5,6 +5,7 @@ import Nav from "../../Components/nav/Nav";
 import { DataContext } from "../../hooks/data/DataHook";
 import Btns from "../../Components/Buttons/Btns";
 import { Loader } from "../../Components/Loader/Loader";
+import Footer from "../../Components/generalComponents/footer/Footer";
 
 const Browse = () => {
   const [loading, setLoading] = useState(true);
@@ -57,6 +58,7 @@ const Browse = () => {
           buttonTitle={"Load More"}
         />
       )}
+      <Footer />
     </>
   );
 };

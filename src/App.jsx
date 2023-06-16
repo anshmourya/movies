@@ -4,6 +4,7 @@ import SignUp from "./pages/Siginup/SignUp";
 import Home from "./pages/Home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Browse from "./pages/Browse/Browse";
+import SingleMovie from "./pages/singleMovie.jsx/SingleMovie";
 function App() {
   return (
     <>
@@ -13,6 +14,7 @@ function App() {
           <Route path="/Signin" element={<Signin />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/movies" element={<Browse />} />
+          <Route path="/showdetail/:id" element={<SingleMovie />} />
         </Routes>
       </BrowserRouter>
     </>

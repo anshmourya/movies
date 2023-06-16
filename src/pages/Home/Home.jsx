@@ -5,6 +5,7 @@ import { DataContext } from "../../hooks/data/DataHook";
 import SliderStructure from "../../Components/generalComponents/Slider/SliderStructure";
 import MovieCard from "../../Components/generalComponents/Card/movieCard/MovieCard";
 import PosterCard from "../../Components/generalComponents/Card/posterCard/PosterCard";
+import Footer from "../../Components/generalComponents/footer/Footer";
 
 const Home = () => {
   const { getAllMovies } = useContext(DataContext);
@@ -51,7 +52,6 @@ const Home = () => {
   return (
     <>
       <Nav />
-
       <SliderStructure
         element={PosterCard}
         data={Data}
@@ -78,6 +78,7 @@ const Home = () => {
           );
         })}
       </div>
+      <Footer />
     </>
   );
 };

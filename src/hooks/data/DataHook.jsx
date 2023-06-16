@@ -13,7 +13,6 @@ export const DataProvider = ({ children }) => {
           Authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`,
         },
       });
-      // console.log(responses.data);
       return responses.data;
     } catch (error) {
       console.error(error);
@@ -39,8 +38,20 @@ export const DataProvider = ({ children }) => {
     }
   };
 
+  //function for single movies
+
+  const getSingleMovie = async (id) => {
+    try {
+      const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
+      const result = await fetchCall(url);
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <DataContext.Provider value={{ getGenres, getAllMovies }}>
+    <DataContext.Provider value={{ getGenres, getAllMovies, getSingleMovie }}>
       {children}
     </DataContext.Provider>
   );
