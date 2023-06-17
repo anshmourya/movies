@@ -5,13 +5,13 @@ const PosterData = ({ data }) => {
   return (
     <>
       <div className="absolute top-20 left-16 md:top-40 lg:top-56 xl:top-60">
-        <div className="logo hidden md:block text-red-700 font-bold">
+        <div className="hidden font-bold text-red-700 logo md:block">
           NETFLIX
         </div>
-        <h1 className="text-lg font-bold my-2 md:text-4xl lg:text-6xl xl:my-6">
+        <h1 className="my-2 text-lg font-bold md:text-4xl lg:text-6xl xl:my-6">
           {data.title}
         </h1>
-        <div className="flex text-lg gap-2 items-center text-red-500">
+        <div className="flex items-center gap-2 text-lg text-red-500">
           <AiTwotoneStar />
           <AiTwotoneStar />
           <AiTwotoneStar />
@@ -19,7 +19,7 @@ const PosterData = ({ data }) => {
           <AiTwotoneStar />
           <span className="text-white">{data.vote_average / 2}(imdb)</span>
         </div>
-        <p className="w-1/3 text-sm hidden lg:block my-4 xl:text-lg">
+        <p className="hidden w-1/3 my-4 text-sm lg:block xl:text-lg">
           {data.overview}
         </p>
         <Btns
@@ -29,7 +29,7 @@ const PosterData = ({ data }) => {
           }
         />
         {data.genres && data.genres.length > 0 && (
-          <h1 className="text-9xl font-bold opacity-40">
+          <h1 className="hidden font-bold text-8xl opacity-40 xl:block">
             {data.genres[0].name}
           </h1>
         )}

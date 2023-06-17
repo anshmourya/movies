@@ -39,8 +39,9 @@ const Browse = () => {
         imgStyling={
           "w-screen h-96 object-cover brightness-50 hover:scale-125 aaaa cursor-pointer"
         }
+        img={"/assets/signinBg.jpg"}
       />
-      <h1 className="container m-auto text-3xl my-4">Movie Genere</h1>
+      <h1 className="container m-auto my-4 text-3xl">Movie Genere</h1>
       <div className="container grid grid-cols-1 m-auto my-10 gap-y-4 lg:grid-cols-3 md:grid-cols-2">
         {MovieData.map((items) => (
           <MovieCard key={items.id} data={items} />
