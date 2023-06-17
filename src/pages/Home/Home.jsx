@@ -6,6 +6,7 @@ import SliderStructure from "../../Components/generalComponents/Slider/SliderStr
 import MovieCard from "../../Components/generalComponents/Card/movieCard/MovieCard";
 import PosterCard from "../../Components/generalComponents/Card/posterCard/PosterCard";
 import Footer from "../../Components/generalComponents/footer/Footer";
+import { handleResize, getData } from "./HelperFunction";
 
 const Home = () => {
   const { getAllMovies } = useContext(DataContext);
@@ -13,39 +14,20 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [slidesPerView, setSlidesPerView] = useState(3);
 
-  const getData = async (page) => {
-    try {
-      const res = await getAllMovies(page);
-      return res;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       const newData = await Promise.all(
-        pageNumbers.map((page) => getData(page))
+        pageNumbers.map((page) => getData(page, getAllMovies))
       );
       setData(newData);
     };
 
     fetchData();
 
-    const handleResize = () => {
-      const width = window.innerWidth;
-
-      if (width < 1000) {
-        setSlidesPerView(2);
-      } else {
-        setSlidesPerView(3);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize(setSlidesPerView));
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", handleResize(setSlidesPerView));
     };
   }, []);
 

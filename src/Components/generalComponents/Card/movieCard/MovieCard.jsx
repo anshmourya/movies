@@ -6,18 +6,18 @@ const MovieCard = ({ data }) => {
   const { title, backdrop_path: img, release_date, id } = data;
   return (
     <>
-      <div className="relative cursor-pointer border-l-4 border-transparent hover:border-red-600 transition-all  hover:scale-110 rounded-lg aaaa m-2">
+      <div className="relative m-2 transition-all border-l-4 border-transparent rounded-lg cursor-pointer hover:border-red-600 hover:scale-110 aaaa">
         <img
           src={`http://image.tmdb.org/t/p/w400${img}`}
           alt={title}
-          className="object-cover brightness-50 rounded-lg"
+          className="object-cover rounded-lg brightness-50"
         />
-        <div className="absolute top-14 left-8 text-sm leading-9 text-white ">
+        <div className="absolute text-sm leading-9 text-white top-14 left-8 ">
           <div>{title}</div>
           <div>{release_date}</div>
           <Btns
             buttonTitle={"Play Now"}
-            onClickFuntion={() => navigate(`showdetail/${id}`)}
+            onClickFuntion={() => navigate(`/showdetail/${id}`)}
             buttonStyle={" bg-red-600 text-white p-2 text-sm rounded-md w-35"}
           />
         </div>

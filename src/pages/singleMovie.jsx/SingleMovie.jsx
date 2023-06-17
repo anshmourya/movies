@@ -1,17 +1,19 @@
 import { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import PosterCard from "../../Components/generalComponents/Card/posterCard/PosterCard";
 import Nav from "../../Components/nav/Nav";
 import { DataContext } from "../../hooks/data/DataHook";
 import Loader1 from "../../Components/Loader/Loader1";
 import Footer from "../../Components/generalComponents/footer/Footer";
 import StarringCard from "../../Components/generalComponents/Card/starring card/StarringCard";
+import PosterData from "../../Components/generalComponents/Card/posterCard/PosterData";
 
 const SingleMovie = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const { getSingleMovie } = useContext(DataContext);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { id } = useParams();
 
   const fetchCall = async (movieId) => {
     try {
@@ -58,9 +60,28 @@ const SingleMovie = () => {
                 );
               })}
             </div>
+            <div className="flex items-center justify-center my-20 gap-9 ">
+              <PosterCard
+                showContent={false}
+                img={`https://image.tmdb.org/t/p/original${data.poster_path}`}
+                imgStyling={"brightness50 max-w[572px] max-h-[856px]"}
+              />
+              <PosterData
+                data={data}
+                postion={"static"}
+                onClickFuntion={() => {
+                  {
+                    data.homepage
+                      ? window.location.replace(data.homepage)
+                      : navigate("/");
+                  }
+                }}
+              />
+            </div>
           </>
         )}
       </div>
+
       <Footer />
     </>
   );

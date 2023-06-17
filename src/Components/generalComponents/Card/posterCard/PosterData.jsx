@@ -1,10 +1,14 @@
 import { AiTwotoneStar } from "react-icons/ai";
 import Btns from "../../../Buttons/Btns";
 
-const PosterData = ({ data }) => {
+const PosterData = ({ data, postion, onClickFuntion }) => {
   return (
     <>
-      <div className="absolute top-20 left-16 md:top-40 lg:top-56 xl:top-60">
+      <div
+        className={`${
+          postion ? postion : "absolute"
+        } top-20 left-16 md:top-40 lg:top-56 xl:top-60`}
+      >
         <div className="hidden font-bold text-red-700 logo md:block">
           NETFLIX
         </div>
@@ -27,6 +31,7 @@ const PosterData = ({ data }) => {
           buttonStyle={
             "bg-red-600 text-white p-2 text-lg rounded-md w-52 my-3 "
           }
+          onClickFuntion={onClickFuntion}
         />
         {data.genres && data.genres.length > 0 && (
           <h1 className="hidden font-bold text-8xl opacity-40 xl:block">

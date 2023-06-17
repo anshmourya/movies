@@ -12,7 +12,7 @@ const PosterCard = ({ data, showContent = true, imgStyling, img }) => {
           alt=""
           className={
             !imgStyling
-              ? "brightness-50 md:h-screen md:w-screen md:object-cover "
+              ? "brightness-50 md:h-screen md:w-screen md:object-cover"
               : imgStyling
           }
         />
@@ -23,3 +23,4 @@ const PosterCard = ({ data, showContent = true, imgStyling, img }) => {
 };
 
 export default PosterCard;
+//brightness-50 md:h-screen md:w-screen md:object-cover
