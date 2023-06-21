@@ -42,6 +42,7 @@ const Home = () => {
   return (
     <>
       <Nav /> {/* Render navigation component */}
+      {/* rendering the poster getting the map from hardcode data */}
       <SliderStructure
         element={PosterCard}
         data={Data}
@@ -49,7 +50,7 @@ const Home = () => {
         autoplay={true}
         showNav={false}
       />{" "}
-      {/* Render slider with poster cards */}
+      {/* rendering the slider based on the page no array. and title is passing by hardcode. using promise all to call the getAllmovies in parell. */}
       <div className="container m-auto">
         {data.map((result, index) => {
           const Title = [

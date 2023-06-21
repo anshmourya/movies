@@ -14,12 +14,12 @@ const SingleMovie = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getSingleMovie, getAllMovies } = useContext(DataContext);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]); //to store the data of single movie geeting id from useparam
   const [loading, setLoading] = useState(true);
   const pageNumbers = [3, 1, 5, 9]; // Array of page numbers
-  const [Movies, setMovies] = useState([]);
+  const [Movies, setMovies] = useState([]); //to store the array of the movie getting from the pagenumber
   const [slidesPerView, setSlidesPerView] = useState(3);
-
+  //callback function to handel the window resizing
   const handleResizeCallback = useCallback(() => {
     handleResize(setSlidesPerView);
   }, []);
@@ -39,7 +39,7 @@ const SingleMovie = () => {
   useEffect(() => {
     fetchCall(id);
   }, [id]);
-
+  // fetching the data based on the pagenumber Array. and also using the handleResizeCallback handel the slidesPerView of the slider
   useEffect(() => {
     const fetchData = async () => {
       const newData = await Promise.all(
@@ -67,6 +67,7 @@ const SingleMovie = () => {
           </>
         ) : (
           <>
+            {/* posterCard: to display the detailed info of the movie using the movied ID from the useparam */}
             <PosterCard
               showContent={true}
               data={data}
@@ -103,6 +104,8 @@ const SingleMovie = () => {
                 }}
               />
             </div>
+            {/* rendering the movies using the pagenumber array by calling the
+            getAllMovies function */}
             {Movies.map((item, index) => {
               const Title = [
                 "Popular Videos",
