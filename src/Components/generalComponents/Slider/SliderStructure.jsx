@@ -39,11 +39,9 @@ const SliderStructure = ({
         modules={[Autoplay, Navigation]}
       >
         {data.map((item) => (
-          <>
-            <SwiperSlide key={item.id}>
-              <Element data={item} />
-            </SwiperSlide>
-          </>
+          <SwiperSlide key={item.id}>
+            <Element data={item} />
+          </SwiperSlide>
         ))}
         <Btns
           buttonTitle={<BsChevronLeft />}

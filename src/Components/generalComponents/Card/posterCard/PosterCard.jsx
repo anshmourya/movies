@@ -1,9 +1,8 @@
-import React from "react";
 import PosterData from "./PosterData";
 
 const PosterCard = ({ data, showContent = true, imgStyling, img }) => {
   const image = data?.backdrop_path || img;
-  console.log(data);
+
   return (
     <>
       <div className="relative overflow-hidden">

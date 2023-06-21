@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import Data from "../../Poster.json";
 import Nav from "../../Components/nav/Nav";
 import { DataContext } from "../../hooks/data/DataHook";
@@ -10,37 +10,46 @@ import { handleResize, getData } from "./HelperFunction";
 
 const Home = () => {
   const { getAllMovies } = useContext(DataContext);
-  const pageNumbers = [1, 2, 3]; // Array of page numbers
+  const pageNumbers = [1, 2, 3];
   const [data, setData] = useState([]);
   const [slidesPerView, setSlidesPerView] = useState(3);
 
+  // Callback function to handle resize events
+  const handleResizeCallback = useCallback(() => {
+    handleResize(setSlidesPerView);
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
+      // Fetch data for each page number asynchronously
       const newData = await Promise.all(
         pageNumbers.map((page) => getData(page, getAllMovies))
       );
-      setData(newData);
+      setData(newData); // Update data state with fetched data
     };
 
-    fetchData();
+    fetchData(); // Call the fetchData function
 
-    window.addEventListener("resize", handleResize(setSlidesPerView));
+    // Add event listener for resize events and invoke handleResizeCallback
+    window.addEventListener("resize", handleResizeCallback);
 
+    // Cleanup function to remove event listener when component unmounts
     return () => {
-      window.removeEventListener("resize", handleResize(setSlidesPerView));
+      window.removeEventListener("resize", handleResizeCallback);
     };
-  }, []);
+  }, [handleResizeCallback]); // Run effect only when handleResizeCallback changes
 
   return (
     <>
-      <Nav />
+      <Nav /> {/* Render navigation component */}
       <SliderStructure
         element={PosterCard}
         data={Data}
         slidesPerView={1}
         autoplay={true}
         showNav={false}
-      />
+      />{" "}
+      {/* Render slider with poster cards */}
       <div className="container m-auto">
         {data.map((result, index) => {
           const Title = [
@@ -56,11 +65,11 @@ const Home = () => {
               title={Title[index]}
               slidesPerView={slidesPerView}
               showNav={true}
-            />
+            /> // Render slider for each data result with movie cards
           );
         })}
       </div>
-      <Footer />
+      <Footer /> {/* Render footer component */}
     </>
   );
 };

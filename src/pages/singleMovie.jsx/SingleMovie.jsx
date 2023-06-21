@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import PosterCard from "../../Components/generalComponents/Card/posterCard/PosterCard";
 import Nav from "../../Components/nav/Nav";
@@ -7,13 +7,22 @@ import Loader1 from "../../Components/Loader/Loader1";
 import Footer from "../../Components/generalComponents/footer/Footer";
 import StarringCard from "../../Components/generalComponents/Card/starring card/StarringCard";
 import PosterData from "../../Components/generalComponents/Card/posterCard/PosterData";
-
+import { getData, handleResize } from "../Home/HelperFunction";
+import SliderStructure from "../../Components/generalComponents/Slider/SliderStructure";
+import MovieCard from "../../Components/generalComponents/Card/movieCard/MovieCard";
 const SingleMovie = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { getSingleMovie } = useContext(DataContext);
+  const { getSingleMovie, getAllMovies } = useContext(DataContext);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const pageNumbers = [3, 1, 5, 9]; // Array of page numbers
+  const [Movies, setMovies] = useState([]);
+  const [slidesPerView, setSlidesPerView] = useState(3);
+
+  const handleResizeCallback = useCallback(() => {
+    handleResize(setSlidesPerView);
+  }, []);
 
   const fetchCall = async (movieId) => {
     try {
@@ -31,6 +40,22 @@ const SingleMovie = () => {
     fetchCall(id);
   }, [id]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const newData = await Promise.all(
+        pageNumbers.map((page) => getData(page, getAllMovies))
+      );
+      setMovies(newData);
+    };
+
+    fetchData();
+
+    window.addEventListener("resize", handleResizeCallback);
+
+    return () => {
+      window.removeEventListener("resize", handleResizeCallback);
+    };
+  }, [handleResizeCallback]);
   return (
     <>
       <Nav />
@@ -78,6 +103,24 @@ const SingleMovie = () => {
                 }}
               />
             </div>
+            {Movies.map((item, index) => {
+              const Title = [
+                "Popular Videos",
+                "Specials & Latest Videos",
+                "Videos Recommended For You",
+                "Upcoming Videos",
+              ];
+              return (
+                <SliderStructure
+                  key={index}
+                  element={MovieCard}
+                  data={item}
+                  title={Title[index]}
+                  showNav={true}
+                  slidesPerView={slidesPerView}
+                />
+              );
+            })}
           </>
         )}
       </div>

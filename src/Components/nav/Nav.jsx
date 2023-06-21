@@ -12,7 +12,7 @@ const Nav = () => {
   return (
     <>
       <nav
-        className="flex justify-between items-center p-5 absolute w-full z-10"
+        className="absolute z-10 flex items-center justify-between w-full p-5"
         style={{ background: "rgba(20, 20, 20, 0.5)" }}
       >
         <Logo width={"w-9"} />
@@ -26,4 +26,4 @@ const Nav = () => {
   );
 };
 
-export default React.memo(Nav);
+export default Nav;
