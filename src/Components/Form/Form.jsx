@@ -1,7 +1,6 @@
 import { ToastContainer } from "react-toastify";
-import SigninBtn from "../../Components/Buttons/SigninBtn";
 import { Link } from "react-router-dom";
-
+import Btns from "../Buttons/Btns";
 const Form = ({ title }) => {
   return (
     <>
@@ -26,9 +25,16 @@ const Form = ({ title }) => {
             placeholder="password"
             className="block h-12 m-auto my-4 w-[100%] outline-none p-3 rounded-lg bg-gray-700 text-white"
           />
-          <SigninBtn />
+          <Link to="/">
+            <Btns
+              buttonStyle={
+                "w-full h-12 text-sm text-center text-white bg-red-600 rounded-lg"
+              }
+              buttonTitle={title === "Sign In" ? "Sign In" : "Sign Up"}
+            />
+          </Link>
           <p className="my-4 text-gray-400">
-            {title == "Sign In" ? "New To Netflix?" : "Already Have Account?"}{" "}
+            {title === "Sign In" ? "New To Netflix?" : "Already Have Account?"}{" "}
             <span className="text-white cursor-pointer hover:border-b">
               <Link to={title === "Sign In" ? "/signup" : "/signin"}>
                 {title === "Sign In" ? "Sign Up Now" : "Sign In Now"}
